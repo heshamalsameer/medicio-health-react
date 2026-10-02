@@ -1,0 +1,114 @@
+/* Doctor cards */
+.doc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.doc-card {
+  height: 100%;
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+}
+.doc-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-lg);
+}
+.doc-media {
+  position: relative;
+  aspect-ratio: 1 / 1.05;
+  overflow: hidden;
+}
+.doc-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1s var(--ease), filter 0.6s;
+}
+.doc-card:hover .doc-media img {
+  transform: scale(1.08);
+}
+.doc-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(31, 125, 129, 0.75), transparent 55%);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.doc-card:hover .doc-media::after {
+  opacity: 1;
+}
+.doc-social {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 18px;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+.doc-social a {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  color: var(--accent-700);
+  font-size: 0.9rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease), background 0.3s, color 0.3s;
+  transition-delay: calc(var(--s) * 60ms);
+}
+.doc-card:hover .doc-social a {
+  opacity: 1;
+  transform: none;
+}
+.doc-social a:hover {
+  background: var(--accent);
+  color: #fff;
+}
+.doc-body {
+  padding: 20px 22px 24px;
+  text-align: center;
+}
+.doc-body h3 {
+  font-size: 1.1rem;
+}
+.doc-body p {
+  position: relative;
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-top: 6px;
+  padding-top: 10px;
+}
+.doc-body p::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 30px;
+  height: 2px;
+  margin-left: -15px;
+  background: var(--accent);
+  transition: width 0.5s var(--ease), margin 0.5s var(--ease);
+}
+.doc-card:hover .doc-body p::before {
+  width: 60px;
+  margin-left: -30px;
+}
+@media (max-width: 1000px) {
+  .doc-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .doc-grid {
+    grid-template-columns: 1fr;
+  }
+}

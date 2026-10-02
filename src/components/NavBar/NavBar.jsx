@@ -1,87 +1,142 @@
-import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 import "./NavBar.css";
 import Apointment from "../Apointment/Apointment";
-const NavBar = () => {
-  const [num, setNum] = useState("1");
+import { IoSunnyOutline, IoMoonOutline, IoClose, IoChevronDown } from "react-icons/io5";
+import { FaPlus } from "react-icons/fa6";
+import { useScrollY } from "../../hooks/useReveal";
+
+const links = [
+  { id: "home", label: "Home" },
+  { id: "about", label: "About" },
+  { id: "services", label: "Services" },
+  { id: "departments", label: "Departments" },
+  { id: "doctors", label: "Doctors" },
+];
+const more = [
+  { id: "testimonials", label: "Testimonials" },
+  { id: "gallery", label: "Gallery" },
+  { id: "pricing", label: "Pricing" },
+  { id: "faq", label: "FAQ" },
+];
+const tail = [{ id: "contact", label: "Contact" }];
+const all = [...links, ...more, ...tail];
+
+const NavBar = ({ theme, onToggleTheme }) => {
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("home");
+  const y = useScrollY();
+
+  useEffect(() => {
+    const sections = all.map((l) => document.getElementById(l.id)).filter(Boolean);
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
+      { rootMargin: "-45% 0px -50% 0px" }
+    );
+    sections.forEach((s) => io.observe(s));
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    const onKey = (e) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  const close = () => setOpen(false);
+  const moreActive = more.some((m) => m.id === active);
+  const linkCls = (id) => (active === id ? "active-link" : "");
+
   return (
     <>
-      <Navbar
-        expand="lg"
-        className="bg-body-tertiary  position-sticky top-0 z-3   "
-      >
-        <Container fluid className="container">
-          <Navbar.Brand href="#" className="w-15">
-            <img src="/imgs/logo.png" className="w-100" />
-          </Navbar.Brand>
-          <Apointment />
-          <Navbar.Toggle aria-controls="navbarScroll" className="fs-s" />
-          <Navbar.Collapse id="navbarScroll" className="flex-grow-0">
-            <Nav
-              className="me-auto my-2 my-lg-0 fs-s  fw-bold"
-              style={{ maxHeight: "100px" }}
-              navbarScroll
+      <header className={`NavBar ${y > 40 ? "scrolled" : ""}`}>
+        <nav className="wrap nav-inner" aria-label="Main">
+          <a href="#home" className="logo" onClick={close}>
+            <span className="logo-mark">
+              <FaPlus />
+            </span>
+            Medicio
+          </a>
+
+          <ul className="ulNavBar">
+            {links.map((l) => (
+              <li key={l.id}>
+                <a href={`#${l.id}`} className={linkCls(l.id)}>
+                  {l.label}
+                </a>
+              </li>
+            ))}
+            <li className="has-drop">
+              <button className={moreActive ? "active-link" : ""} aria-haspopup="true">
+                More <IoChevronDown />
+              </button>
+              <ul className="drop">
+                {more.map((l) => (
+                  <li key={l.id}>
+                    <a href={`#${l.id}`} className={linkCls(l.id)}>
+                      {l.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </li>
+            {tail.map((l) => (
+              <li key={l.id}>
+                <a href={`#${l.id}`} className={linkCls(l.id)}>
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <div className="nav-actions">
+            <button
+              className="theme-toggle"
+              onClick={onToggleTheme}
+              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
             >
-              <Nav.Link
-                href="#Home"
-                onClick={() => setNum("1")}
-                style={{ color: num == "1" ? "#3fbbc0" : "black" }}
-              >
-                HOME
-              </Nav.Link>
-              <Nav.Link
-                href="#About"
-                onClick={() => setNum("2")}
-                style={{ color: num == "2" ? "#3fbbc0" : "black" }}
-              >
-                ABOUT
-              </Nav.Link>
-              <Nav.Link
-                href="#services"
-                onClick={() => setNum("3")}
-                style={{ color: num == "3" ? "#3fbbc0" : "black" }}
-              >
-                SERVICES
-              </Nav.Link>
-              <Nav.Link
-                href="#action2"
-                onClick={() => setNum("4")}
-                style={{ color: num == "4" ? "#3fbbc0" : "black" }}
-              >
-                DEPARTMENTS
-              </Nav.Link>
-              <Nav.Link
-                href="#action2"
-                onClick={() => setNum("5")}
-                style={{ color: num == "5" ? "#3fbbc0" : "black" }}
-              >
-                DOCTORS
-              </Nav.Link>
-              <NavDropdown title="DROPDOWN" id="navbarScrollingDropdown">
-                <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action4">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action5">
-                  Something else here
-                </NavDropdown.Item>
-              </NavDropdown>
-              <Nav.Link
-                href="#action2"
-                onClick={() => setNum("6")}
-                style={{ color: num == "6" ? "#3fbbc0" : "black" }}
-              >
-                CONTACT
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+              <span className={`ti ${theme === "dark" ? "" : "on"}`}>
+                <IoMoonOutline />
+              </span>
+              <span className={`ti ${theme === "dark" ? "on" : ""}`}>
+                <IoSunnyOutline />
+              </span>
+            </button>
+            <Apointment className="nav-cta" />
+            <button
+              className="burger"
+              onClick={() => setOpen(true)}
+              aria-label="Open menu"
+              aria-expanded={open}
+            >
+              <span />
+              <span />
+              <span />
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      <div className={`menu-overlay ${open ? "show" : ""}`} onClick={close} />
+      <aside className={`ulmenu ${open ? "open" : ""}`} aria-hidden={!open}>
+        <button className="menu-close" onClick={close} aria-label="Close menu">
+          <IoClose />
+        </button>
+        <ul>
+          {all.map((l, i) => (
+            <li key={l.id} style={{ "--i": i }}>
+              <a href={`#${l.id}`} onClick={close} className={linkCls(l.id)}>
+                <small>{String(i + 1).padStart(2, "0")}</small>
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <div className="menu-foot" style={{ "--i": all.length }}>
+          <Apointment onClick={close} />
+        </div>
+      </aside>
     </>
   );
 };

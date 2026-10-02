@@ -1,0 +1,64 @@
+.track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 48px) / 3);
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 4px;
+  scrollbar-width: none;
+  padding: 14px 4px 30px;
+  margin: -14px -4px 0;
+}
+.track::-webkit-scrollbar {
+  display: none;
+}
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+}
+.controls > button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.25rem;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  transition: background 0.35s, color 0.35s, border-color 0.35s, transform 0.35s var(--ease);
+}
+.controls > button:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  transform: scale(1.08);
+}
+.dots {
+  display: flex;
+  gap: 8px;
+}
+.dots button {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--line);
+  transition: width 0.45s var(--ease), background 0.3s;
+}
+.dots .on {
+  width: 34px;
+  background: var(--accent);
+}
+@media (max-width: 1000px) {
+  .track {
+    grid-auto-columns: calc((100% - 24px) / 2);
+  }
+}
+@media (max-width: 640px) {
+  .track {
+    grid-auto-columns: 88%;
+  }
+}

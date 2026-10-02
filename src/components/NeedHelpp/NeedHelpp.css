@@ -1,0 +1,109 @@
+.need-help {
+  position: relative;
+  margin-top: clamp(70px, 9vw, 110px);
+  padding: clamp(50px, 7vw, 80px) 0;
+  background: linear-gradient(120deg, var(--accent-700), var(--accent));
+  color: #fff;
+  overflow: hidden;
+  isolation: isolate;
+}
+.nh-bg span {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: -1;
+  animation: drift 12s ease-in-out infinite alternate;
+}
+.nh-bg span:nth-child(1) {
+  width: 420px;
+  height: 420px;
+  top: -200px;
+  left: -120px;
+}
+.nh-bg span:nth-child(2) {
+  width: 260px;
+  height: 260px;
+  bottom: -140px;
+  right: 10%;
+  animation-delay: -4s;
+}
+.nh-bg span:nth-child(3) {
+  width: 120px;
+  height: 120px;
+  top: 20px;
+  right: 30%;
+  background: rgba(255, 255, 255, 0.06);
+  animation-delay: -8s;
+}
+@keyframes drift {
+  to {
+    transform: translate(40px, 30px) scale(1.1);
+  }
+}
+.nh-inner {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.nh-phone {
+  position: relative;
+  flex: none;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  color: var(--accent-700);
+  background: #fff;
+  animation: ringPhone 2.5s ease-in-out infinite;
+}
+.nh-phone::before,
+.nh-phone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  animation: pulseRing 2.5s ease-out infinite;
+}
+.nh-phone::after {
+  animation-delay: 1.25s;
+}
+@keyframes pulseRing {
+  from {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  to {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+@keyframes ringPhone {
+  0%, 60%, 100% { transform: rotate(0); }
+  65%, 75%, 85% { transform: rotate(-12deg); }
+  70%, 80% { transform: rotate(12deg); }
+}
+.nh-text {
+  flex: 1;
+}
+.nh-text h2 {
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  margin-bottom: 8px;
+}
+.nh-text p {
+  opacity: 0.9;
+  max-width: 620px;
+}
+@media (max-width: 860px) {
+  .nh-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+  .nh-text p {
+    margin-inline: auto;
+  }
+}

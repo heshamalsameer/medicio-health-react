@@ -1,24 +1,49 @@
+import { useState } from "react";
 import Card from "../../components/pricing/PricingCard";
 import styles from "./Pricing.module.css";
+import { HeaderSection } from "../../components/HeaderSection/HeaderSection";
+
+const plans = [
+  { title: "Free", price: 0 },
+  { title: "Business", price: 19 },
+  { title: "Developer", price: 29 },
+  { title: "Ultimate", price: 48, isAdvance: true },
+];
 
 export const Pricing = () => {
+  const [yearly, setYearly] = useState(false);
+
   return (
-    <div className="d-flex flex-column my-4 align-items-center">
-      <h3 className="text-xl-center">Pricing</h3>
-      <hr style={{ width: "3rem", border: "1px solid #0cb8b6" }} />
-      <p className="text-center">
-        lorem ipsum whatever whatever whatever whatever whatever whatever
-        whatever{" "}
-      </p>
-      <div
-        className={`${styles.cards} d-flex flex-row`}
-        style={{ width: "90%" }}
-      >
-        <Card title={"Free"} price={"0"} isFree={true} />
-        <Card title={"Business"} price={"19"} isBusiness={true} />
-        <Card title={"Developer"} price={"29"} />
-        <Card title={"Ultimate"} price={"48"} isAdvance={true} />
+    <section id="pricing" className="section alt">
+      <div className="wrap">
+        <HeaderSection
+          eyebrow="Pricing"
+          title={
+            <>
+              Simple plans, <em>no surprises</em>
+            </>
+          }
+          description="Choose a care plan that fits your family. Switch or cancel any time."
+        />
+
+        <div className={`reveal ${styles.toggleWrap}`}>
+          <div className={styles.toggle} data-yearly={yearly}>
+            <span className={styles.pill} />
+            <button onClick={() => setYearly(false)} aria-pressed={!yearly}>
+              Monthly
+            </button>
+            <button onClick={() => setYearly(true)} aria-pressed={yearly}>
+              Yearly <small>-20%</small>
+            </button>
+          </div>
+        </div>
+
+        <div className={styles.cards}>
+          {plans.map((p, i) => (
+            <Card key={p.title} {...p} yearly={yearly} index={i} />
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };

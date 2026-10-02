@@ -1,3 +1,49 @@
+.section-title {
+  max-width: 660px;
+  margin: 0 auto clamp(40px, 6vw, 60px);
+  text-align: center;
+}
+.section-title.left {
+  margin-left: 0;
+  text-align: left;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.section-title.left .eyebrow-bar:last-child {
+  display: none;
+}
+.eyebrow-bar {
+  width: 30px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transition: transform 1s var(--ease) 0.3s;
+}
+.eyebrow.is-visible .eyebrow-bar {
+  transform: scaleX(1);
+}
+.st-text {
+  color: var(--muted);
+  margin-top: 14px;
+}
+.section-title.light h2,
+.section-title.light .st-text {
+  color: #fff;
+}
+.section-title.light .eyebrow,
+.section-title.light h2 em {
+  color: #a6ecea;
+}
 .underline {
   width: 50px;
   height: 3px;

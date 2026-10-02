@@ -1,11 +1,28 @@
-import React from "react";
+/* eslint-disable react/prop-types */
 import "./SectionTitle.css";
-const SectionTitle = ({ title, text }) => {
+
+/**
+ * Shared section heading.
+ * eyebrow — small uppercase label, title — main heading (JSX allowed), text — subtitle.
+ */
+const SectionTitle = ({ eyebrow, title, text, align = "center", light = false }) => {
   return (
-    <div className="container d-flex flex-column align-items-center gap-2 text-center mt-5">
-      <h3>{title}</h3>
-      <span className="underline bg-maincolor rounded-pill"></span>
-      <p>{text}</p>
+    <div className={`section-title ${align} ${light ? "light" : ""}`}>
+      {eyebrow && (
+        <p className="eyebrow reveal">
+          <span className="eyebrow-bar" />
+          {eyebrow}
+          <span className="eyebrow-bar" />
+        </p>
+      )}
+      <h2 className="h-display reveal" style={{ "--d": "80ms" }}>
+        {title}
+      </h2>
+      {text && (
+        <p className="st-text reveal" style={{ "--d": "140ms" }}>
+          {text}
+        </p>
+      )}
     </div>
   );
 };

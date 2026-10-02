@@ -1,19 +1,29 @@
-import React from "react";
 import Apointment from "../Apointment/Apointment";
+import { IoCall } from "react-icons/io5";
+import "./NeedHelpp.css";
 
 const NeedHelpp = () => {
   return (
-    <div className=" bg-maincolor py-5">
-      <div className=" container d-flex flex-column justify-content-center align-items-center text-center bg-maincolor text-white">
-        <h4>In an emergency? Need help now?</h4>
-        <p>
-          Duis aute irure dolor in reprehnderit in voluptate velit esse cillum
-          dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat non
-          proident,sunt in culpa qui officia deserunt mollit anim id est laborum
-        </p>
-        <Apointment />
+    <section className="need-help">
+      <div className="nh-bg" aria-hidden="true">
+        <span />
+        <span />
+        <span />
       </div>
-    </div>
+      <div className="wrap nh-inner reveal">
+        <a href="tel:+15589554885" className="nh-phone" aria-label="Call emergency line">
+          <IoCall />
+        </a>
+        <div className="nh-text">
+          <h2>In an emergency? Need help now?</h2>
+          <p>
+            Our emergency department is open 24/7 with specialists on call. Call us
+            directly or book an urgent appointment and we’ll take care of the rest.
+          </p>
+        </div>
+        <Apointment light />
+      </div>
+    </section>
   );
 };
 

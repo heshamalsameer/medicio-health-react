@@ -1,103 +1,84 @@
-import { Container } from "react-bootstrap";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import { FaFacebook } from "react-icons/fa";
 import styles from "./Footer.module.css";
-import { FaInstagram } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa6";
-import { FaXTwitter } from "react-icons/fa6";
+import { FaXTwitter, FaFacebookF, FaInstagram, FaLinkedinIn, FaPlus, FaRegCopyright } from "react-icons/fa6";
+import { IoArrowForward } from "react-icons/io5";
 import { FooterSection } from "../../components/footerSection/FooterSection";
-import { FaRegCopyright } from "react-icons/fa6";
 
 const links = [
   {
     title: "Useful Links",
     content: [
-      "Home",
-      "About us",
-      "Services",
-      "Terms of service",
-      "Privacy policy",
+      { label: "Home", href: "#home" },
+      { label: "About us", href: "#about" },
+      { label: "Services", href: "#services" },
+      { label: "Doctors", href: "#doctors" },
+      { label: "Contact", href: "#contact" },
     ],
   },
   {
-    title: "Our Services",
+    title: "Departments",
     content: [
-      "Web Design",
-      "Web Developer",
-      "Product Managment",
-      "Marketing",
-      "Graphic Design",
+      { label: "Cardiology", href: "#departments" },
+      { label: "Neurology", href: "#departments" },
+      { label: "Hepatology", href: "#departments" },
+      { label: "Pediatrics", href: "#departments" },
+      { label: "Ophthalmology", href: "#departments" },
     ],
-  },
-  {
-    title: "Hic Solutasetp ",
-    content: [
-      "Molestiae accusamus iure",
-      "Excepturi disnissimos",
-      "Suscipit distinctio",
-      "Dilecta",
-      "Sit quas consectetur",
-    ],
-  },
-  {
-    title: "Nobis illum",
-    content: ["Ipsam", "Laudantium dolorum", "Dinera", "Trodelas", "Flexo"],
   },
 ];
+
 export const Footer = () => {
   return (
-    <div className={`${styles.footer}`}>
-      <Container className={` py-5`}>
-        <Row>
-          <Col xs={6} md={4}>
-            <h1 className="mb-4 ">Medicio</h1>
-            <p>
-              A108 Adam Street
-              <br />
-              New York,NY 534468{" "}
-            </p>
-            <p>
-              <span className={styles.phone}>Phone: </span>15233 65566 333
-              <br />
-              <span className={styles.phone}>Email: </span>aaa@gmail.com
-            </p>
+    <footer className={styles.footer}>
+      <div className={`wrap ${styles.grid}`}>
+        <div className={styles.brand}>
+          <a href="#home" className={styles.logo}>
+            <span>
+              <FaPlus />
+            </span>
+            Medicio
+          </a>
+          <p>
+            A108 Adam Street, New York, NY 535022
+            <br />
+            <strong>Phone:</strong> +1 5589 55488 55
+            <br />
+            <strong>Email:</strong> info@example.com
+          </p>
+          <div className={styles.social}>
+            {[FaXTwitter, FaFacebookF, FaInstagram, FaLinkedinIn].map((Icon, i) => (
+              <a key={i} href="#" aria-label="Social link">
+                <Icon />
+              </a>
+            ))}
+          </div>
+        </div>
 
-            <Row>
-              <Col>
-                {" "}
-                <FaXTwitter className={`${styles.contactIcon}`} />
-              </Col>
-              <Col>
-                {" "}
-                <FaFacebook className={`${styles.contactIcon}`} />
-              </Col>
-              <Col>
-                {" "}
-                <FaInstagram className={`${styles.contactIcon}`} />
-              </Col>
-              <Col>
-                {" "}
-                <FaLinkedin className={`${styles.contactIcon}`} />
-              </Col>
-            </Row>
-          </Col>
-          {links.map((item, index) => {
-            return (
-              <Col key={index} xs={6} md={3} lg={2}>
-                <FooterSection links={item} />
-              </Col>
-            );
-          })}
-        </Row>
-        <hr />
-        <p className="text-center">
-          <FaRegCopyright className="me-1" />
-          Copyright <span className={styles.phone}>Medicio</span> All Right
-          Reserved <br /> Design by{" "}
-          <span className={styles.bootstarap}>BootstrapMade</span>
-        </p>
-      </Container>
-    </div>
+        {links.map((item) => (
+          <div key={item.title} className={styles.col}>
+            <FooterSection links={item} />
+          </div>
+        ))}
+
+        <div className={styles.col}>
+          <h4>Newsletter</h4>
+          <p className={styles.note}>Health tips and clinic news, once a month.</p>
+          <form className={styles.news} onSubmit={(e) => e.preventDefault()}>
+            <input type="email" placeholder="Your email" aria-label="Email" required />
+            <button aria-label="Subscribe">
+              <IoArrowForward />
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div className={`wrap ${styles.bottom}`}>
+        <span>
+          <FaRegCopyright /> {new Date().getFullYear()} <strong>Medicio</strong>. All Rights Reserved.
+        </span>
+        <span>
+          Designed by <span className={styles.bootstarap}>BootstrapMade</span>
+        </span>
+      </div>
+    </footer>
   );
 };

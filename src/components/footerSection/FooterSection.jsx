@@ -1,17 +1,14 @@
+/* eslint-disable react/prop-types */
 export const FooterSection = ({ links }) => {
-  //   console.log(links);
-
   return (
     <>
-      <h6>{links.title}</h6>
+      <h4>{links.title}</h4>
       <ul>
-        {links.content.map((item, index) => {
-          return (
-            <li key={index}>
-              <a href="#">{item}</a>
-            </li>
-          );
-        })}
+        {links.content.map((item) => (
+          <li key={item.label}>
+            <a href={item.href}>{item.label}</a>
+          </li>
+        ))}
       </ul>
     </>
   );

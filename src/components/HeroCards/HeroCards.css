@@ -1,8 +1,90 @@
-.w-card {
-  width: 13rem;
+.hero-cards {
+  position: relative;
+  z-index: 5;
+  margin-top: -80px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
 }
-@media screen and (max-width: 576px) {
-  .w-card {
-    width: 100%;
+.w-card {
+  position: relative;
+  height: 100%;
+  padding: 30px 26px;
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+}
+.w-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(145deg, var(--accent), var(--accent-700));
+  clip-path: circle(0% at 100% 0%);
+  transition: clip-path 0.7s var(--ease);
+}
+.w-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-lg);
+}
+.w-card:hover::before {
+  clip-path: circle(150% at 100% 0%);
+}
+.hc-ic {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+  color: var(--accent);
+  background: var(--accent-soft);
+  margin-bottom: 20px;
+  transition: background 0.5s, color 0.5s, transform 0.6s var(--ease);
+}
+.w-card h3 {
+  font-size: 1.12rem;
+  margin-bottom: 8px;
+  transition: color 0.5s;
+}
+.w-card p {
+  font-size: 0.9rem;
+  color: var(--muted);
+  transition: color 0.5s;
+}
+.hc-num {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--line);
+  transition: color 0.5s;
+}
+.w-card:hover .hc-ic {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  transform: rotateY(180deg);
+}
+.w-card:hover h3,
+.w-card:hover p {
+  color: #fff;
+}
+.w-card:hover .hc-num {
+  color: rgba(255, 255, 255, 0.2);
+}
+@media (max-width: 1000px) {
+  .hero-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  .hero-cards {
+    grid-template-columns: 1fr;
+    margin-top: -60px;
   }
 }

@@ -1,8 +1,63 @@
-.w-aboutcard {
-  width: 16rem;
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  margin: clamp(60px, 8vw, 100px) 0;
 }
-@media screen and (max-width: 576px) {
-  .w-aboutcard {
-    width: 100%;
+.w-aboutcard {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 26px 24px;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease), background 0.5s;
+}
+.w-aboutcard:hover {
+  transform: translateY(-8px);
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+.ac-ic {
+  flex: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--accent-700));
+  box-shadow: var(--glow);
+  transition: transform 0.6s var(--ease);
+}
+.w-aboutcard:hover .ac-ic {
+  transform: rotate(360deg);
+}
+.w-aboutcard strong {
+  display: block;
+  font-size: 2.1rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.w-aboutcard strong sup {
+  font-size: 0.5em;
+  color: var(--accent);
+}
+.w-aboutcard .ac-label {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+@media (max-width: 1000px) {
+  .about-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .about-stats {
+    grid-template-columns: 1fr;
   }
 }

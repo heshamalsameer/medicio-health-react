@@ -1,40 +1,170 @@
-.swiper-slide {
-  height: 100%; /* Make each slide take full height */
-  display: flex; /* Optional: Center content */
-  justify-content: center; /* Optional: Center content */
-  align-items: center; /* Optional: Center content */
+.gallery {
+  padding-bottom: clamp(60px, 8vw, 100px);
+}
+.gallery-slider {
+  position: relative;
+}
+.gallery .swiper {
+  padding: 20px 0 60px;
+}
+.gallery .swiper-slide {
+  width: min(420px, 72vw);
+  transition: opacity 0.5s;
+}
+.gallery .swiper-slide:not(.swiper-slide-active) {
+  opacity: 0.55;
+}
+.g-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  padding: 0;
+}
+.slide-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease);
+}
+.swiper-slide-active .g-item {
+  box-shadow: 0 0 0 4px var(--accent), var(--shadow-lg);
+}
+.g-item:hover .slide-img {
+  transform: scale(1.06);
+}
+.g-zoom {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 1.8rem;
+  color: #fff;
+  background: rgba(31, 125, 129, 0.45);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.swiper-slide-active .g-item:hover .g-zoom {
+  opacity: 1;
+}
+.gallery .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--line);
+  opacity: 1;
+  transition: width 0.45s var(--ease), background 0.3s;
+}
+.gallery .swiper-pagination-bullet-active {
+  width: 30px;
+  background: var(--accent);
+}
+.g-nav {
+  position: absolute;
+  top: calc(50% - 20px);
+  left: 0;
+  right: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.g-nav button {
+  pointer-events: auto;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.3rem;
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+  transform: translateY(-50%);
+  transition: background 0.3s, color 0.3s, transform 0.35s var(--ease);
+}
+.g-nav button:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-50%) scale(1.08);
 }
 
-/* Style for all slides */
-.swiper-container .slide-img {
-  transition: transform 0.3s ease;
+/* lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1500;
+  display: grid;
+  place-items: center;
+  padding: 60px 70px;
+  background: rgba(6, 14, 20, 0.92);
+  backdrop-filter: blur(6px);
+  animation: lbFade 0.35s var(--ease);
 }
-
-/* Style for the active slide (slightly larger) */
-.swiper-slide-active .slide-img {
-  border: 4px solid #0cb8b6;
-  transform: scale(1.5); /* Adjust the scale to make the active slide bigger */
+.lightbox img {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  animation: lbPop 0.5s var(--ease);
 }
-.swiper {
-  height: 13rem;
+.lb-close,
+.lb-arrow {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.4rem;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  transition: background 0.3s, transform 0.35s var(--ease);
 }
-.swiper-container {
-  width: 70%;
-  margin: 25px auto 150px auto;
+.lb-close:hover,
+.lb-arrow:hover {
+  background: var(--accent);
 }
-
-.swiper-pagination-bullet {
-  background-color: white !important;
-  border: 1px solid #0a7b7a !important;
-  border-radius: 50% !important;
-  padding: 1px !important;
+.lb-close {
+  top: 18px;
+  right: 18px;
 }
-
-.swiper-pagination-bullet-active {
-  background-color: #0cb8b6 !important;
+.lb-close:hover {
+  transform: rotate(90deg);
 }
-
-.swiper-pagination {
-  text-align: center;
-  bottom: 10px !important;
+.lb-arrow.left {
+  left: 14px;
+}
+.lb-arrow.right {
+  right: 14px;
+}
+.lb-count {
+  position: absolute;
+  bottom: 20px;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+}
+@keyframes lbFade {
+  from { opacity: 0; }
+}
+@keyframes lbPop {
+  from { opacity: 0; transform: scale(0.92); }
+}
+@media (max-width: 640px) {
+  .g-nav {
+    display: none;
+  }
+  .lightbox {
+    padding: 60px 12px;
+  }
+  .lb-arrow {
+    bottom: 16px;
+    top: auto;
+  }
+  .lb-arrow.left { left: 20%; }
+  .lb-arrow.right { right: 20%; }
 }

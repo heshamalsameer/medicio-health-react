@@ -1,11 +1,15 @@
-.services {
-  background-color: #eee;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
 }
-.serviceIcon {
-  width: 70px;
-  height: 70px;
-  padding: 15px;
-  border-radius: 50%;
-  background-color: white;
-  color: aqua;
+@media (max-width: 1000px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }

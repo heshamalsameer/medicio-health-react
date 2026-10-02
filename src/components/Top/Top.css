@@ -1,1 +1,58 @@
-
+.topbar {
+  background: linear-gradient(90deg, var(--accent-700), var(--accent));
+  color: #fff;
+  font-size: 0.85rem;
+}
+.topbar-inner {
+  height: 44px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  animation: topIn 0.8s var(--ease) both;
+}
+.topbar-info {
+  display: flex;
+  gap: 26px;
+}
+.topbar-info > * {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.95;
+}
+.topbar-info a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+.topbar-social {
+  display: flex;
+  gap: 6px;
+}
+.topbar-social a {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 0.8rem;
+  transition: background 0.3s, transform 0.4s var(--ease);
+}
+.topbar-social a:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+@keyframes topIn {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+@media (max-width: 768px) {
+  .topbar-info span,
+  .topbar-social {
+    display: none !important;
+  }
+  .topbar-inner {
+    justify-content: center;
+  }
+}

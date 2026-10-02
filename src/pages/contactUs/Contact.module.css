@@ -1,24 +1,193 @@
 .contact {
-  background-color: #eee;
+  background: var(--surface);
+}
+.map {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  height: 340px;
+  margin-bottom: 30px;
+  background: var(--card);
+}
+.map iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+:global([data-theme="dark"]) .map iframe {
+  filter: invert(0.9) hue-rotate(180deg) saturate(0.8);
+}
+.grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 30px;
+  align-items: start;
+}
+.grid > * {
+  min-width: 0;
+}
+.infoGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.wide {
+  grid-column: 1 / -1;
 }
 .contactCol {
-  background-color: white;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  border-radius: var(--radius);
+  background: var(--card);
+  border: 1px solid var(--line);
+  transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease);
 }
-iframe {
-  height: 280px !important;
+.contactCol:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow);
 }
 .contactIcon {
-  width: 50px;
-  height: 50px;
-  padding: 5px;
-  border: dotted 2px #3fbbc0;
-  color: #3fbbc0;
+  flex: none;
+  width: 56px;
+  height: 56px;
+  padding: 12px;
+  border: 2px dashed var(--accent);
+  color: var(--accent);
   border-radius: 50%;
+  transition: background 0.4s, color 0.4s, border-color 0.4s, transform 0.6s var(--ease);
 }
-.sendButton {
-  background-color: #3fbbc0;
-  border: none;
+.contactCol:hover .contactIcon {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  transform: rotate(360deg);
 }
-.sendButton:hover {
-  background-color: #5fb6b9;
+.contactCol h4 {
+  font-size: 1.02rem;
+}
+.contactCol p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  word-break: break-word;
+}
+.form {
+  padding: clamp(24px, 3vw, 36px);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+.row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.field {
+  position: relative;
+  margin-bottom: 16px;
+  min-width: 0;
+}
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 24px 16px 9px;
+  border-radius: 14px;
+  border: 1.5px solid transparent;
+  background: var(--surface);
+  color: var(--ink);
+  outline: none;
+  resize: vertical;
+  transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+}
+.field input:focus,
+.field textarea:focus {
+  border-color: var(--accent);
+  background: var(--card);
+  box-shadow: 0 0 0 4px rgba(63, 187, 192, 0.15);
+}
+.field label {
+  position: absolute;
+  left: 17px;
+  top: 17px;
+  color: var(--muted);
+  font-size: 0.93rem;
+  pointer-events: none;
+  transform-origin: left top;
+  transition: transform 0.3s var(--ease), color 0.3s;
+}
+.field input:focus + label,
+.field input:not(:placeholder-shown) + label,
+.field textarea:focus + label,
+.field textarea:not(:placeholder-shown) + label {
+  transform: translateY(-10px) scale(0.76);
+  color: var(--accent);
+}
+.invalid input,
+.invalid textarea {
+  border-color: var(--danger);
+  animation: shake 0.4s;
+}
+.err {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.76rem;
+  color: var(--danger);
+}
+@keyframes shake {
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+.actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.spinner {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid rgba(63, 187, 192, 0.35);
+  border-top-color: var(--accent);
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.toast {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #16a34a;
+  font-weight: 600;
+  font-size: 0.92rem;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+}
+.show {
+  opacity: 1;
+  transform: none;
+}
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 520px) {
+  .infoGrid,
+  .row2 {
+    grid-template-columns: 1fr;
+    gap: 0 16px;
+  }
+  .infoGrid {
+    gap: 14px;
+  }
+  .map {
+    height: 260px;
+  }
 }

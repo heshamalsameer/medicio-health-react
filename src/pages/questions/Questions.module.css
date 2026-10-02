@@ -1,3 +1,82 @@
 .questions {
-  background-color: #dcebeb;
+  background: var(--bg);
+}
+.list {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.item {
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid transparent;
+  transition: background 0.4s, border-color 0.4s, box-shadow 0.4s;
+}
+.item:hover {
+  border-color: var(--line);
+}
+.open {
+  background: var(--card);
+  border-color: var(--line);
+  box-shadow: var(--shadow);
+}
+.head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 22px;
+  text-align: left;
+}
+.num {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+.q {
+  flex: 1;
+  font-weight: 600;
+  color: var(--ink);
+}
+.ic {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.15rem;
+  color: var(--accent);
+  background: var(--card);
+  border: 1px solid var(--line);
+  transition: transform 0.5s var(--ease), background 0.3s, color 0.3s;
+}
+.open .ic {
+  transform: rotate(135deg);
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.55s var(--ease);
+}
+.open .body {
+  grid-template-rows: 1fr;
+}
+.body > div {
+  overflow: hidden;
+}
+.body p {
+  padding: 0 22px 22px 58px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+@media (max-width: 560px) {
+  .body p {
+    padding-left: 22px;
+  }
 }

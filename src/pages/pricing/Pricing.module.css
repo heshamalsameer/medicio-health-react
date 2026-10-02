@@ -1,6 +1,204 @@
-@media screen and (max-width: 992px) {
+.toggleWrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 44px;
+}
+.toggle {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 6px;
+  border-radius: 999px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+.toggle button {
+  position: relative;
+  z-index: 1;
+  padding: 10px 26px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--muted);
+  transition: color 0.4s;
+}
+.toggle button small {
+  margin-left: 4px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  background: var(--accent-soft);
+  color: var(--accent-700);
+}
+.toggle button[aria-pressed="true"] {
+  color: #fff;
+}
+.pill {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: 6px;
+  width: calc(50% - 6px);
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: var(--glow);
+  transition: transform 0.5s var(--ease);
+}
+.toggle[data-yearly="true"] .pill {
+  transform: translateX(100%);
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+:global(.price-card) {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 34px 28px 30px;
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+}
+:global(.price-card:hover) {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-lg);
+}
+:global(.price-card.featured) {
+  background: linear-gradient(160deg, var(--accent), var(--accent-700));
+  border-color: transparent;
+  color: #fff;
+  box-shadow: var(--glow);
+}
+:global(.price-card h3) {
+  font-size: 1.1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+:global(.price-card.featured h3),
+:global(.price-card.featured .price strong) {
+  color: #fff;
+}
+:global(.ribbon) {
+  position: absolute;
+  top: 18px;
+  right: -36px;
+  padding: 6px 40px;
+  transform: rotate(45deg);
+  background: #fff;
+  color: var(--accent-700);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+:global(.price) {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  margin: 18px 0 22px;
+}
+:global(.price .cur) {
+  font-weight: 600;
+  margin-top: 8px;
+}
+:global(.price strong) {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--ink);
+  animation: numIn 0.5s var(--ease);
+}
+:global(.price .per) {
+  align-self: flex-end;
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-bottom: 6px;
+}
+@keyframes numIn {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+}
+:global(.price-card ul) {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 28px;
+  padding-top: 22px;
+  border-top: 1px dashed var(--line);
+}
+:global(.price-card.featured ul) {
+  border-top-color: rgba(255, 255, 255, 0.3);
+}
+:global(.price-card li) {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.92rem;
+}
+:global(.price-card li svg) {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  padding: 4px;
+  border-radius: 50%;
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+:global(.price-card.featured li svg) {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+}
+:global(.price-card li.off) {
+  opacity: 0.45;
+  text-decoration: line-through;
+}
+:global(.price-card li.off svg) {
+  color: var(--muted);
+  background: var(--surface);
+}
+:global(.price-btn) {
+  display: block;
+  padding: 14px;
+  border-radius: 999px;
+  text-align: center;
+  font-weight: 600;
+  border: 1.5px solid var(--accent);
+  color: var(--accent);
+  transition: background 0.35s, color 0.35s, transform 0.35s var(--ease);
+}
+:global(.price-btn:hover) {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-2px);
+}
+:global(.price-btn.solid) {
+  background: #fff;
+  border-color: #fff;
+  color: var(--accent-700);
+}
+:global(.price-btn.solid:hover) {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+@media (max-width: 1000px) {
   .cards {
-    flex-direction: column !important;
-    align-items: center;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  .cards {
+    grid-template-columns: 1fr;
   }
 }

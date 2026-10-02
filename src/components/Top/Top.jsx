@@ -1,19 +1,31 @@
-import React from "react";
 import "./Top.css";
 import { MdOutlineWatchLater } from "react-icons/md";
 import { LuSmartphone } from "react-icons/lu";
+import { FaFacebookF, FaXTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa6";
 
 const Top = () => {
   return (
-    <div className=" bg-maincolor text-white p-1 " id="Home">
-      <div className="container d-flex justify-content-center justify-content-sm-between">
-        <div className="d-none d-sm-flex justify-content-center align-items-center gap-1">
-          <MdOutlineWatchLater size={20} />
-          <p className="m-0">Monday-Saturday, 8AM to 10PM</p>
+    <div className="topbar">
+      <div className="wrap topbar-inner">
+        <div className="topbar-info">
+          <span>
+            <MdOutlineWatchLater /> Monday - Saturday, 8AM to 10PM
+          </span>
+          <a href="tel:+15589554885">
+            <LuSmartphone /> Call us now +1 5589 55488 55
+          </a>
         </div>
-        <div className="d-flex justify-content-center align-items-center gap-1">
-          <LuSmartphone size={20} />
-          <p className="m-0 ">Call us now +1 5589 55488 55</p>
+        <div className="topbar-social">
+          {[
+            [FaXTwitter, "X"],
+            [FaFacebookF, "Facebook"],
+            [FaInstagram, "Instagram"],
+            [FaLinkedinIn, "LinkedIn"],
+          ].map(([Icon, label]) => (
+            <a key={label} href="#" aria-label={label}>
+              <Icon />
+            </a>
+          ))}
         </div>
       </div>
     </div>

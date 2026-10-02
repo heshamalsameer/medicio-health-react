@@ -1,15 +1,18 @@
-import React from "react";
-import Button from "react-bootstrap/Button";
-const Apointment = () => {
+/* eslint-disable react/prop-types */
+import { FaRegCalendarCheck } from "react-icons/fa6";
+
+const Apointment = ({ light = false, className = "", onClick }) => {
   return (
-    <>
-      <Button
-        size="sm"
-        className="bg-maincolor border border-1 border border-white "
-      >
-        Make an Apointment
-      </Button>
-    </>
+    <a
+      href="#appointment"
+      onClick={onClick}
+      className={`btn ${light ? "btn--light" : ""} ${className}`}
+    >
+      <span className="btn-ic">
+        <FaRegCalendarCheck />
+      </span>
+      Make an Appointment
+    </a>
   );
 };
 
